@@ -1,0 +1,172 @@
+/* ==========================================================================
+   1. Global Styles & Browser Resets
+   ========================================================================== */
+
+/* This enables smooth scrolling when a user clicks on a navbar link, 
+   instead of instantly jumping to the section. */
+html {
+  scroll-behavior: smooth;
+}
+
+/* We reset the default margin on the body to 0. Browsers add a small
+   margin by default, which creates unwanted white space around the page. */
+body {
+  margin: 0;
+  /* Sets a clean, modern, and widely compatible font for the entire page. */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ==========================================================================
+   2. Fixed Navigation Bar
+   ========================================================================== */
+
+.navbar {
+  /* 'fixed' makes the navbar stick to the screen, even when you scroll. */
+  position: fixed;
+  /* 'top: 0' pins it to the very top of the browser window. */
+  top: 0;
+  /* Ensures the navbar spans the full width of the screen. */
+  width: 100%;
+  background-color: black;
+  /* We use Flexbox to easily align the links inside. */
+  display: flex;
+  /* A high z-index ensures the navbar stays on top of all other content. */
+  z-index: 1000;
+}
+
+/* This styles the individual links (<a> tags) inside the navbar. */
+.navbar a {
+  /* 'flex-grow: 1' tells each link to take up an equal amount of space,
+     making them spread out evenly across the bar. */
+  flex-grow: 1;
+  color: white;
+  /* Removes the default blue underline from links. */
+  text-decoration: none;
+  /* Adds space inside each link, making them easier to click. */
+  padding: 18px 22px;
+  text-align: center;
+  /* Adds a smooth fade effect for the background color change on hover. */
+  transition: background-color 0.3s ease;
+}
+
+/* This rule applies when you mouse over a navbar link. */
+.navbar a:hover {
+  background-color: #555; /* Changes the background to a dark grey. */
+}
+
+/* ==========================================================================
+   3. Main Content Area
+   ========================================================================== */
+
+/* This styles the <main> tag that holds all of our sections. */
+main {
+  /* We add padding to the top to push all the content down,
+     preventing the first section from being hidden underneath the fixed navbar. */
+  padding-top: 60px; 
+}
+
+/* ==========================================================================
+   4. General & Specific Section Styling
+   ========================================================================== */
+
+/* This is the base style for all <section> tags. */
+section {
+  /* 'min-height: 90vh' makes each section take up at least 90% of the
+     browser window's height. It's more flexible than a fixed height. */
+  min-height: 90vh;
+  /* We use Flexbox again to perfectly center the .content div inside. */
+  display: flex;
+  justify-content: center; /* Horizontally centers content. */
+  align-items: center;   /* Vertically centers content. */
+  /* Adds space around the content inside each section. */
+  padding: 40px;
+  /* Ensures padding is included in the element's total height and width. */
+  box-sizing: border-box;
+}
+
+/* The Intro section gets a special background image. */
+#intro {
+  /* The linear-gradient creates a semi-transparent black overlay,
+     making the white text on top easy to read. */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.pexels.com/photos/1631677/pexels-photo-1631677.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  /* Scales the image to cover the entire section without distortion. */
+  background-size: cover;
+  /* Centers the image within the section. */
+  background-position: center;
+  /* This creates a parallax effect where the image stays still as you scroll. */
+  background-attachment: fixed;
+  /* Sets the text color to white for high contrast. */
+  color: white;
+}
+
+/* Styles the ODD-numbered sections (1st, 3rd, 5th), but NOT the intro. */
+section:nth-child(odd):not(#intro) {
+  background-color: #F9FA80; /* Yellow background */
+}
+
+/* Styles the EVEN-numbered sections (2nd, 4th, 6th). */
+section:nth-child(even) {
+  background-color: #454545; /* Black background */
+  color: #f0f0f0;            /* Light grey text */
+}
+
+/* ==========================================================================
+   5. Content Layout (Image + Text)
+   ========================================================================== */
+
+/* This styles the .content div that holds the image and text. */
+.content {
+  display: flex;         /* Makes it a flex container for side-by-side items. */
+  align-items: center;   /* Vertically aligns the image and text. */
+  gap: 50px;             /* Creates a 50px space between the image and text. */
+  max-width: 1200px;     /* Sets a maximum width for the content area. */
+  width: 100%;
+}
+
+/* For even sections, this flips the order of items in the .content div. */
+section:nth-child(even) .content {
+  /* This moves the image to the right and the text to the left. */
+  flex-direction: row-reverse;
+}
+
+/* We override the flex settings for the intro since it has no image. */
+#intro .content {
+  text-align: center;
+  max-width: 800px;
+}
+
+/* ==========================================================================
+   6. Text and Image Element Styling
+   ========================================================================== */
+
+.text-content {
+  max-width: 600px;
+}
+.text-content p {
+  /* Increases the space between lines of text for better readability. */
+  line-height: 1.6;
+}
+
+img {
+  /* Using max-width makes images responsive; they'll shrink on small screens. */
+  max-width: 450px;
+  /* 'height: auto' ensures the image's aspect ratio is maintained. */
+  height: auto;
+  border-radius: 10px; /* Adds nice rounded corners to the images. */
+  /* Adds a subtle shadow for a lifting effect. */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* ==========================================================================
+   7. Responsive Design for Smaller Screens (e.g., Mobile)
+   ========================================================================== */
+
+/* This block of code only applies when the screen width is 768px or less. */
+@media (max-width: 768px) {
+  .content {
+    /* Stacks the image and text vertically instead of side-by-side.
+       The '!important' ensures this rule overrides the row-reverse rule. */
+    flex-direction: column !important;
+    text-align: center;
+  }
+}
